@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motion Skills · Studio Sizzle · GSAP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,500&family=Space+Grotesk:wght@500;700&family=Inter:wght@500;700;900&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,500&family=Space+Grotesk:wght@500;700&family=Inter:wght@500;700;900&display=swap"></noscript>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:     #08070b;
+    --bg2:    #100d16;
+    --ink:    #f5f2ec;
+    --muted:  #8a8597;
+    --amber:  #ffb347;
+    --red:    #ff4d3d;
+    --cyan:   #38e8d8;
+    --violet: #8b5cff;
+    --pink:   #ff5db1;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    font-family: 'Anton', sans-serif;
+  }
+
+  #stage {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(130% 120% at 50% -10%, #181321 0%, var(--bg2) 42%, var(--bg) 100%);
+    perspective: 1300px;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(70px); opacity: 0.4;
+    will-change: transform; pointer-events: none;
+  }
+  #blobA { width: 50vmin; height: 50vmin; background: var(--violet); top: -12%; left: -8%; }
+  #blobB { width: 44vmin; height: 44vmin; background: var(--cyan);   bottom: -14%; right: -10%; opacity: 0.3; }
+  #blobC { width: 34vmin; height: 34vmin; background: var(--pink);   top: 55%; left: 58%; opacity: 0.26; }
+
+  .scene {
+    position: absolute;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    will-change: transform, opacity;
+    z-index: 2;
+  }
+  .line {
+    display: flex; gap: 0 0.06em;
+    overflow: hidden; padding: 0.05em 0;
+    justify-content: center;
+  }
+  .word {
+    font-size: clamp(2.6rem, 13vw, 11rem);
+    line-height: 0.84;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-transform: uppercase;
+    white-space: nowrap;
+    will-change: transform, opacity;
+  }
+  .char { display: inline-block; will-change: transform, opacity; }
+
+  .serif {
+    font-family: 'Fraunces', serif; font-weight: 900;
+    text-transform: none; letter-spacing: -0.03em;
+  }
+  .serif.italic { font-style: italic; font-weight: 500; }
+  .grotesk { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+
+  .amber { color: var(--amber); }
+  .red   { color: var(--red); }
+  .cyan  { color: var(--cyan); }
+  .violet{ color: var(--violet); }
+  .pink  { color: var(--pink); }
+  .stroke{ color: transparent; -webkit-text-stroke: 2.5px var(--ink); }
+
+  .mega {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(3rem, 18vw, 16rem);
+    line-height: 0.8; color: var(--ink);
+    letter-spacing: -0.035em;
+  }
+
+  .lockup {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2.4rem, 11vw, 9.5rem);
+    line-height: 0.82; letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+
+  .brandmark {
+    font-family: 'Fraunces', serif; font-weight: 900;
+    text-transform: lowercase;
+    font-size: clamp(2.4rem, 12vw, 10rem);
+    line-height: 0.82; letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .brandmark .dot { color: var(--amber); }
+
+  .kicker {
+    font-family: 'Inter', sans-serif; font-weight: 900;
+    font-size: clamp(0.7rem, 1.7vw, 1.05rem);
+    letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--muted); text-indent: 0.45em;
+  }
+
+  /* ===== Signature master-logo framing (umbrella finale) ===== */
+  #frame {
+    position: absolute; z-index: 1;
+    width: min(70vw, 1020px); height: min(46vh, 540px);
+    top: 50%; left: 50%;
+    pointer-events: none; will-change: transform, opacity;
+  }
+  .crop {
+    position: absolute; width: 4.4rem; height: 4.4rem;
+    will-change: transform, opacity;
+  }
+  .crop::before, .crop::after {
+    content: ''; position: absolute; background: var(--ink);
+  }
+  /* horizontal arm */
+  .crop::before { height: 2px; width: 100%; }
+  /* vertical arm */
+  .crop::after  { width: 2px; height: 100%; }
+  #cTL { top: 0; left: 0; }
+  #cTL::before { top: 0; left: 0; } #cTL::after { top: 0; left: 0; }
+  #cTR { top: 0; right: 0; }
+  #cTR::before { top: 0; right: 0; } #cTR::after { top: 0; right: 0; }
+  #cBL { bottom: 0; left: 0; }
+  #cBL::before { bottom: 0; left: 0; } #cBL::after { bottom: 0; left: 0; }
+  #cBR { bottom: 0; right: 0; }
+  #cBR::before { bottom: 0; right: 0; } #cBR::after { bottom: 0; right: 0; }
+  /* thin baseline rule beneath the wordmark */
+  #baseline {
+    position: absolute; z-index: 1;
+    height: 1.5px; width: min(54vw, 760px);
+    top: 50%; left: 50%;
+    transform-origin: center;
+    background: linear-gradient(90deg, transparent, var(--amber) 18%, var(--amber) 82%, transparent);
+    will-change: transform, opacity;
+  }
+
+  #fx { position: fixed; inset: 0; pointer-events: none; z-index: 45; overflow: hidden; }
+  .panel { position: absolute; will-change: transform; visibility: hidden; }
+
+  #flash { position: fixed; inset: 0; background: var(--ink); opacity: 0; pointer-events: none; z-index: 50; }
+
+  .grain {
+    position: fixed; inset: 0; pointer-events: none;
+    opacity: 0.07; mix-blend-mode: overlay; z-index: 60;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  #progress {
+    position: fixed; left: 0; bottom: 0;
+    height: 3px; width: 100%;
+    transform: scaleX(0); transform-origin: left;
+    background: linear-gradient(90deg, var(--amber), var(--pink), var(--violet));
+    z-index: 70;
+  }
+
+  .ui {
+    position: fixed; font-family: 'Inter', sans-serif; font-weight: 900;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    z-index: 80; color: var(--muted);
+  }
+  #brand { top: 22px; left: 24px; }
+  #replay {
+    bottom: 20px; right: 22px; background: transparent;
+    border: 1.5px solid #34303d; border-radius: 999px;
+    padding: 9px 18px; cursor: pointer;
+    transition: color .2s, border-color .2s, background .2s;
+  }
+  #replay:hover { color: var(--bg); background: var(--ink); border-color: var(--ink); }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div class="blob" id="blobA"></div>
+    <div class="blob" id="blobB"></div>
+    <div class="blob" id="blobC"></div>
+
+    <!-- Scene 1 : MOTION -->
+    <div class="scene" id="s1">
+      <div class="line"><span class="kicker">iart.ai&nbsp;&nbsp;Studio&nbsp;&nbsp;Presents</span></div>
+      <div class="line"><span class="word mega">MOTION</span></div>
+    </div>
+
+    <!-- Scene 2 : IN EVERY -->
+    <div class="scene" id="s2">
+      <div class="line"><span class="word serif italic amber">in&nbsp;every</span></div>
+    </div>
+
+    <!-- Scene 3 : FRAME -->
+    <div class="scene" id="s3">
+      <div class="line"><span class="word stroke">FRAME</span></div>
+    </div>
+
+    <!-- Scene 4 : rhythm words -->
+    <div class="scene" id="s4">
+      <div class="line"><span class="word cyan">CREATE</span></div>
+      <div class="line"><span class="word violet">ANIMATE</span></div>
+      <div class="line"><span class="word pink">DELIVER</span></div>
+    </div>
+
+    <!-- Scene 5 : lockup -->
+    <div class="scene" id="s5">
+      <div class="line"><span class="word lockup">MOTION</span></div>
+      <div class="line"><span class="word lockup amber">SKILLS</span></div>
+      <div class="line"><span class="kicker">Premium&nbsp;&nbsp;Studio&nbsp;&nbsp;Sizzle</span></div>
+    </div>
+
+    <!-- Scene 6 : iart.ai signature -->
+    <div class="scene" id="s6">
+      <div class="line"><span class="word brandmark">iart<span class="dot">.</span>ai</span></div>
+      <div class="line"><span class="kicker">Creative&nbsp;&nbsp;Intelligence</span></div>
+    </div>
+
+    <!-- Signature master-logo framing -->
+    <div id="frame">
+      <div class="crop" id="cTL"></div>
+      <div class="crop" id="cTR"></div>
+      <div class="crop" id="cBL"></div>
+      <div class="crop" id="cBR"></div>
+    </div>
+    <div id="baseline"></div>
+  </div>
+
+  <div id="fx">
+    <div class="panel" id="p1"></div>
+    <div class="panel" id="p2"></div>
+    <div class="panel" id="p3"></div>
+    <div class="panel" id="p4"></div>
+    <div class="panel" id="p5"></div>
+    <div class="panel" id="p6"></div>
+  </div>
+
+  <div id="flash"></div>
+  <div class="grain"></div>
+  <div id="progress"></div>
+  <div class="ui" id="brand">◆ iart.ai</div>
+  <button class="ui" id="replay">↻ Replay</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+  function splitChars(word) {
+    const text = word.textContent;
+    word.textContent = '';
+    const chars = [];
+    for (const ch of text) {
+      const span = document.createElement('span');
+      span.className = 'char';
+      span.innerHTML = (ch === ' ' || ch === ' ') ? '&nbsp;' : ch;
+      word.appendChild(span);
+      if (ch !== ' ' && ch !== ' ') chars.push(span);
+    }
+    return chars;
+  }
+  document.querySelectorAll('.word:not(.brandmark)').forEach(splitChars);
+
+  function splitBrand(el) {
+    const html = el.innerHTML;
+    el.innerHTML = '';
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    tmp.childNodes.forEach(node => {
+      const isDot = node.nodeType === 1;
+      const text = node.textContent;
+      for (const ch of text) {
+        const span = document.createElement('span');
+        span.className = 'char' + (isDot ? ' dot' : '');
+        span.textContent = ch;
+        el.appendChild(span);
+      }
+    });
+  }
+  document.querySelectorAll('.brandmark').forEach(splitBrand);
+
+  const charsOf = (sel) => gsap.utils.toArray(sel + ' .char');
+
+  gsap.set('.scene', { autoAlpha: 0 });
+  gsap.set(['#frame', '#baseline'], { xPercent: -50, yPercent: -50 });
+  gsap.set(['#frame', '#baseline', '.crop'], { autoAlpha: 0 });
+  gsap.set('#baseline', { scaleX: 0 });
+
+  gsap.to('#blobA', { xPercent: 14, yPercent: 18, duration: 9, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+  gsap.to('#blobB', { xPercent: -18, yPercent: -12, duration: 11, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+  gsap.to('#blobC', { xPercent: -22, yPercent: 16, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+
+  function build() {
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' }, paused: true });
+    tl.fromTo('#progress', { scaleX: 0 }, { scaleX: 1, duration: 9.0, ease: 'none' }, 0);
+
+    // ===== SCENE 1 : MOTION =====
+    tl.set('#s1', { autoAlpha: 1 }, 0)
+      .from('#s1 .kicker', { yPercent: 100, opacity: 0, duration: 0.5 }, 0.05)
+      .from(charsOf('#s1 .mega'), {
+        yPercent: 120, rotateX: -90, opacity: 0,
+        stagger: { each: 0.05, from: 'start' }, duration: 0.7, ease: 'back.out(1.6)'
+      }, 0.2)
+      .to('#s1 .mega', { letterSpacing: '0.02em', duration: 0.6 }, 0.9)
+      // TRANSITION 1 — IMPLODE: spiral into a point
+      .to(charsOf('#s1 .mega').concat(gsap.utils.toArray('#s1 .kicker')), {
+        scale: 0, rotation: 160, opacity: 0, filter: 'blur(6px)',
+        stagger: { each: 0.025, from: 'edges' }, duration: 0.5, ease: 'power3.in'
+      }, 1.35)
+      .set('#s1', { autoAlpha: 0 });
+
+    // ===== SCENE 2 : IN EVERY =====
+    tl.set('#s2', { autoAlpha: 1 }, 1.65)
+      .from(charsOf('#s2'), {
+        yPercent: 130, opacity: 0, skewY: 10,
+        stagger: { each: 0.03, from: 'random' }, duration: 0.55
+      }, 1.7)
+      .to(charsOf('#s2'), {
+        opacity: 0, yPercent: -70, scale: 0.6,
+        stagger: { each: 0.02, from: 'edges' }, duration: 0.35, ease: 'power3.in'
+      }, 2.45)
+      .set('#s2', { autoAlpha: 0 });
+
+    // TRANSITION 2 — COLOR BAND SWEEP
+    const bands = ['#p1','#p2','#p3'];
+    const bandColors = ['var(--cyan)','var(--ink)','var(--violet)'];
+    tl.set(bands, {
+      visibility: 'visible', left: '-5%', width: '110%', height: '120%',
+      top: 0, skewY: -7,
+      backgroundColor: (i) => bandColors[i], yPercent: 135
+    }, 2.39);
+    tl.to(bands, { yPercent: -135, duration: 0.6, stagger: 0.08, ease: 'power3.inOut' }, 2.4)
+      .set(bands, { visibility: 'hidden' }, 3.1);
+
+    // ===== SCENE 3 : FRAME =====
+    tl.set('#s3', { autoAlpha: 1 }, 2.7)
+      .from(charsOf('#s3'), {
+        scale: 5, opacity: 0, filter: 'blur(20px)',
+        stagger: { each: 0.04, from: 'center' }, duration: 0.5
+      }, 2.7)
+      .to('#stage', { x: 6, duration: 0.05, yoyo: true, repeat: 4 }, 2.9)
+      .to('#stage', { x: 0, duration: 0.05 }, 3.2)
+      .to(charsOf('#s3'), {
+        yPercent: 110, opacity: 0, rotateX: 90,
+        stagger: { each: 0.03, from: 'end' }, duration: 0.4, ease: 'power3.in'
+      }, 3.45)
+      .set('#s3', { autoAlpha: 0 });
+
+    // TRANSITION 3 — VENETIAN SHUTTER
+    const blinds = ['#p1','#p2','#p3','#p4'];
+    const blindColors = ['var(--violet)','var(--amber)','var(--cyan)','var(--ink)'];
+    tl.set(blinds, {
+      visibility: 'visible', left: 0, width: '100%', height: '25.2%',
+      top: (i) => (i * 25) + '%',
+      backgroundColor: (i) => blindColors[i],
+      scaleY: 0, transformOrigin: 'top center'
+    }, 3.49);
+    tl.to(blinds, { scaleY: 1, duration: 0.26, stagger: 0.05, ease: 'power2.in' }, 3.5)
+      .set(blinds, { transformOrigin: 'bottom center' }, 3.87)
+      .to(blinds, { scaleY: 0, duration: 0.32, stagger: 0.05, ease: 'power2.out' }, 3.9)
+      .set(blinds, { visibility: 'hidden' }, 4.3);
+
+    // ===== SCENE 4 : CREATE / ANIMATE / DELIVER =====
+    tl.set('#s4', { autoAlpha: 1 }, 3.95);
+    tl.from('#s4 .line:nth-child(1) .char', {
+        yPercent: 120, opacity: 0, stagger: 0.04, duration: 0.45
+      }, 3.97)
+      .from('#s4 .line:nth-child(2) .char', {
+        xPercent: -120, opacity: 0, stagger: 0.04, duration: 0.45
+      }, 4.2)
+      .from('#s4 .line:nth-child(3) .char', {
+        scale: 2.2, opacity: 0, stagger: 0.03, duration: 0.4, ease: 'back.out(2)'
+      }, 4.45)
+      .to('#s4 .line:nth-child(3) .char', {
+        y: -7, duration: 0.08, yoyo: true, repeat: 3, stagger: 0.01
+      }, 4.85)
+      .to(charsOf('#s4'), {
+        opacity: 0, yPercent: 40, filter: 'blur(8px)',
+        stagger: 0.01, duration: 0.3, ease: 'power2.in'
+      }, 4.95)
+      .set('#s4', { autoAlpha: 0 });
+
+    // TRANSITION 4 — WHIP-PAN BLUR
+    tl.to('#stage', { x: -100, filter: 'blur(8px)', duration: 0.16, ease: 'power2.in' }, 5.0)
+      .set('#stage', { x: 110 }, 5.16)
+      .to('#stage', { x: 0, filter: 'blur(0px)', duration: 0.34, ease: 'power3.out' }, 5.16);
+
+    // ===== SCENE 5 : MOTION SKILLS lockup — cinematic master-logo framing =====
+    // Corner crop-marks snap in around the wordmark, with a thin amber baseline rule.
+    const cropFrom = {
+      '#cTL': { x: -34, y: -34 }, '#cTR': { x: 34, y: -34 },
+      '#cBL': { x: -34, y: 34 },  '#cBR': { x: 34, y: 34 }
+    };
+    tl.set('#frame', { autoAlpha: 1 }, 5.2);
+    Object.entries(cropFrom).forEach(([sel, off]) => {
+      tl.fromTo(sel,
+        { autoAlpha: 0, x: off.x, y: off.y, scale: 1.6 },
+        { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 0.42, ease: 'power4.out' }, 5.32);
+    });
+    // baseline rule reveals from center
+    tl.fromTo('#baseline',
+        { autoAlpha: 0, scaleX: 0 },
+        { autoAlpha: 1, scaleX: 1, duration: 0.55, ease: 'power3.inOut' }, 5.45)
+      // hold then dissolve framing toward signature
+      .to(['#frame', '#baseline'], { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 6.45);
+
+    tl.set('#s5', { autoAlpha: 1 }, 5.3)
+      .from('#s5 .line:nth-child(1) .char', {
+        yPercent: 115, rotateX: -85, opacity: 0,
+        stagger: { each: 0.05, from: 'start' }, duration: 0.65, ease: 'back.out(1.7)'
+      }, 5.3)
+      .from('#s5 .line:nth-child(2) .char', {
+        yPercent: 115, rotateX: -85, opacity: 0,
+        stagger: { each: 0.05, from: 'start' }, duration: 0.65, ease: 'back.out(1.7)'
+      }, 5.5)
+      .from('#s5 .kicker', { yPercent: 100, opacity: 0, duration: 0.5 }, 5.9)
+      .to('#flash', { opacity: 0.3, duration: 0.06 }, 5.3)
+      .to('#flash', { opacity: 0, duration: 0.3 }, 5.36)
+      // collapse out toward signature
+      .to(charsOf('#s5'), {
+        scale: 0, opacity: 0, filter: 'blur(8px)',
+        stagger: { each: 0.02, from: 'edges' }, duration: 0.4, ease: 'power3.in'
+      }, 6.45)
+      .to('#s5 .kicker', { opacity: 0, duration: 0.3 }, 6.45)
+      .set('#s5', { autoAlpha: 0 });
+
+    // TRANSITION 5 — IRIS: circular reveal of signature
+    tl.set('#p5', {
+      visibility: 'visible', top: '50%', left: '50%',
+      width: '150vmax', height: '150vmax', xPercent: -50, yPercent: -50,
+      borderRadius: '50%', backgroundColor: 'var(--bg)', scale: 0
+    }, 6.54);
+    tl.to('#p5', { scale: 1, duration: 0.0 }, 6.55)
+      .set('#p5', { scale: 1.4 }, 6.55)
+      .fromTo('#p5', { scale: 1.4 }, { scale: 0, duration: 0.5, ease: 'power3.inOut' }, 6.6)
+      .set('#p5', { visibility: 'hidden' }, 7.15);
+
+    // ===== SCENE 6 : iart.ai signature finale =====
+    // The crop-frame re-snaps tighter around the signature for a polished close.
+    tl.fromTo('#frame',
+        { autoAlpha: 0, scale: 1.18 },
+        { autoAlpha: 1, scale: 1, duration: 0.7, ease: 'power3.out' }, 6.7)
+      .fromTo('#baseline',
+        { autoAlpha: 0, scaleX: 0 },
+        { autoAlpha: 1, scaleX: 1, duration: 0.6, ease: 'power3.inOut' }, 6.95);
+
+    tl.set('#s6', { autoAlpha: 1 }, 6.7)
+      .from(charsOf('#s6 .brandmark'), {
+        yPercent: 115, rotateX: -85, opacity: 0,
+        stagger: { each: 0.06, from: 'start' }, duration: 0.75, ease: 'back.out(1.8)'
+      }, 6.7)
+      .from('#s6 .brandmark .dot', { scale: 0, duration: 0.5, ease: 'back.out(3)' }, 7.2)
+      .to('#s6 .brandmark .dot', { scale: 1.3, duration: 0.45, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 7.5)
+      .from('#s6 .kicker', { yPercent: 100, opacity: 0, duration: 0.55 }, 7.3)
+      .to('#s6 .brandmark', { scale: 1.03, duration: 1.0, ease: 'sine.inOut' }, 7.5)
+      .to('#frame', { scale: 1.015, duration: 1.5, ease: 'sine.inOut' }, 7.1);
+
+    tl.to({}, { duration: 0.4 });
+    return tl;
+  }
+
+  let master = build();
+  master.play(0);
+  document.getElementById('replay').addEventListener('click', () => master.restart());
+</script>
+</body>
+</html>
