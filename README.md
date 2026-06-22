@@ -6,7 +6,7 @@
 
 Motion is the hardest thing to get right from a prompt: timing and easing, safe areas, frame-accurate rendering, on-brand type and color, a loop that actually loops. These skills encode that craft as agent-native workflows — each one teaches the agent *how a professional would build it*, with a **deliver-and-verify loop** (render a frame → screenshot → check) so it inspects its own output instead of hoping.
 
-They're the open-source craft behind **[iart.ai](https://iart.ai)**, the AI motion agent. Bring them into the agent you already use — or let iart.ai run the whole pipeline for you.
+They're the open-source craft behind **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=intro)**, the AI motion agent. Bring them into the agent you already use — or let iart.ai run the whole pipeline for you.
 
 ## The 14 packs
 
@@ -63,4 +63,4 @@ MIT — use them freely.
 
 ---
 
-Built by **[iart.ai](https://iart.ai)**, the AI motion agent — describe it in a prompt, or point it at a CSV or brand kit, and get editable, on-brand motion graphics with exact text and numbers.
+Built by **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=footer)**, the AI motion agent — describe it in a prompt, or point it at a CSV or brand kit, and get editable, on-brand motion graphics with exact text and numbers.
