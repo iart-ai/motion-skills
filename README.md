@@ -1,6 +1,6 @@
 # Motion Graphics Skills for AI Coding Agents
 
-> **50 open-source skills that teach your AI coding agent to make motion graphics, animation, and video** — kinetic typography, data-driven charts, explainers, TikTok / Reels, 3D & WebGL, math animation, and web motion. Fourteen installable packs. Install one, and your agent just knows how.
+> **51 open-source skills that teach your AI coding agent to make motion graphics, animation, and video** — kinetic typography, data-driven charts, explainers, TikTok / Reels, 3D & WebGL, math animation, generative illustration, and web motion. Fifteen installable packs. Install one, and your agent just knows how.
 
 ![Motion Graphics Skills for AI Coding Agents — animated showcase](./showcase.gif)
 
@@ -8,7 +8,7 @@ Motion is the hardest thing to get right from a prompt: timing and easing, safe 
 
 They're the open-source craft behind **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=intro)**, the AI motion agent. Bring them into the agent you already use — or let iart.ai run the whole pipeline for you.
 
-## The 14 packs
+## The 15 packs
 
 Each pack is its own repo, aimed at one audience. Install only what you need.
 
@@ -28,6 +28,7 @@ Each pack is its own repo, aimed at one audience. Install only what you need.
 | **[freelance-motion-skills](https://github.com/iart-ai/freelance-motion-skills)** | Freelancers & studios | 5 |
 | **[webgl-animation-skills](https://github.com/iart-ai/webgl-animation-skills)** | 3D / WebGL / technical | 3 |
 | **[manim-skills](https://github.com/iart-ai/manim-skills)** | Math / educational animators | 1 |
+| **[generative-illustration-skills](https://github.com/iart-ai/generative-illustration-skills)** | Generative-illustration & creative coders | 1 |
 
 ## Install
 
