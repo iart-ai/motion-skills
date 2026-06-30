@@ -28,7 +28,7 @@ Each pack is its own repo, aimed at one audience. Install only what you need.
 | **[freelance-motion-skills](https://github.com/iart-ai/freelance-motion-skills)** | Freelancers & studios | 5 |
 | **[webgl-animation-skills](https://github.com/iart-ai/webgl-animation-skills)** | 3D / WebGL / technical | 3 |
 | **[manim-skills](https://github.com/iart-ai/manim-skills)** | Math / educational animators | 1 |
-| **[motion-illustration-skills](https://github.com/iart-ai/motion-illustration-skills)** | Generative-illustration & creative coders | 1 |
+| **[generative-illustration-skills](https://github.com/iart-ai/generative-illustration-skills)** | Generative-illustration & creative coders | 1 |
 
 ## Install
 
