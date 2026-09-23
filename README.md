@@ -1,6 +1,6 @@
 # Motion Graphics Skills for AI Coding Agents
 
-> **51 open-source skills that teach your AI coding agent to make motion graphics, animation, and video** — kinetic typography, data-driven charts, explainers, TikTok / Reels, 3D & WebGL, math animation, generative illustration, and web motion. Fifteen installable packs. Install one, and your agent just knows how.
+> **53 open-source skills that teach your AI coding agent to make motion graphics, animation, and video** — kinetic typography, data-driven charts, explainers, TikTok / Reels, 3D & WebGL, math animation, generative illustration, code-drawn canvas animation, and web motion. Sixteen installable packs. Install one, and your agent just knows how.
 
 ![Motion Graphics Skills for AI Coding Agents — animated showcase](./showcase.gif)
 
@@ -8,7 +8,7 @@ Motion is the hardest thing to get right from a prompt: timing and easing, safe 
 
 They're the open-source craft behind **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=intro)**, the AI motion agent. Bring them into the agent you already use — or let iart.ai run the whole pipeline for you.
 
-## The 15 packs
+## The 16 packs
 
 Each pack is its own repo, aimed at one audience. Install only what you need.
 
@@ -29,6 +29,7 @@ Each pack is its own repo, aimed at one audience. Install only what you need.
 | **[webgl-animation-skills](https://github.com/iart-ai/webgl-animation-skills)** | 3D / WebGL / technical | 3 |
 | **[manim-skills](https://github.com/iart-ai/manim-skills)** | Math / educational animators | 1 |
 | **[generative-illustration-skills](https://github.com/iart-ai/generative-illustration-skills)** | Generative-illustration & creative coders | 1 |
+| **[javascript-animation-skills](https://github.com/iart-ai/javascript-animation-skills)** | Every frame drawn in JavaScript: zero-asset canvas films + code-made music | 2 |
 
 ## Install
 
@@ -56,7 +57,7 @@ Skills that produce a visual artifact ship a **deliver-and-verify loop** plus a 
 
 ## Built for every kind of motion
 
-Short-form vertical video • explainer and educational clips • data-driven infographics and charts • product and e-commerce demos • brand and ad creative • kinetic typography and titles • editorial map animation • logo and brand-system motion • GSAP / SVG / Lottie web animation • Three.js / WebGL / shaders • Manim math animation • Remotion programmatic video.
+Short-form vertical video • explainer and educational clips • data-driven infographics and charts • product and e-commerce demos • brand and ad creative • kinetic typography and titles • editorial map animation • logo and brand-system motion • GSAP / SVG / Lottie web animation • Three.js / WebGL / shaders • Manim math animation • Remotion programmatic video • zero-asset canvas animation drawn frame by frame in JavaScript.
 
 ## License
 
