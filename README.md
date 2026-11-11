@@ -60,7 +60,7 @@ Once installed, skills are auto-discovered by Claude Code, Cursor, Codex, and 40
 
 *Made in iArt with DeepSeek, each from a one-line prompt.*
 
-These skills are the craft inside **[iArt](https://www.iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=run-it)**, the strongest DeepSeek animation agent. Prebuilt scaffolding, context design and tool design reach the same quality at about **1/5 of the cost** of running the model yourself (average of 10,000+ ablation runs). Made for the latest models: DeepSeek 4.1, Claude Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5 and Gemini 4 Argon. Voiceover, image generation and AI video come out of the same credit. [See pricing →](https://www.iart.ai/pricing?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=run-it)
+These skills are the craft inside **[iArt](https://www.iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=run-it)**, the strongest DeepSeek animation agent and the cheapest Claude animation agent. On Claude, prebuilt scaffolding, context design and tool design reach the same quality at about **1/5 of the cost** of running the model yourself (average of 10,000+ ablation runs on Claude). Made for the latest models: DeepSeek 4.1, Claude Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5 and Gemini 4 Argon. Voiceover, image generation and AI video come out of the same credit. [See pricing →](https://www.iart.ai/pricing?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=run-it)
 
 ## What's a skill?
 
