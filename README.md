@@ -6,7 +6,7 @@
 
 Motion is the hardest thing to get right from a prompt: timing and easing, safe areas, frame-accurate rendering, on-brand type and color, a loop that actually loops. These skills encode that craft as agent-native workflows — each one teaches the agent *how a professional would build it*, with a **deliver-and-verify loop** (render a frame → screenshot → check) so it inspects its own output instead of hoping.
 
-They're the open-source craft behind **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=intro)**, the AI motion agent. Bring them into the agent you already use — or let iart.ai run the whole pipeline for you.
+They're the open-source craft behind **[iart.ai](https://www.iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=intro)**, the AI motion agent. Bring them into the agent you already use — or let iart.ai run the whole pipeline for you.
 
 ## The 19 packs
 
@@ -34,6 +34,8 @@ Each pack is its own repo, aimed at one audience. Install only what you need.
 | **[b-roll-skills](https://github.com/iart-ai/b-roll-skills)** | YouTubers, course creators & editors: b-roll motion graphics for talking-head videos, drawn from what is said | 1 |
 | **[talking-head-skills](https://github.com/iart-ai/talking-head-skills)** | Creators & educators: generate talking-head footage from photos and a voice, then combine it with narration and motion graphics | 1 |
 
+Browse every pack and skill, with install commands, at **[iart.ai/skills](https://www.iart.ai/skills?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=packs)**.
+
 ## Install
 
 Each pack installs on its own:
@@ -52,6 +54,14 @@ Or add one as a Claude Code plugin:
 
 Once installed, skills are auto-discovered by Claude Code, Cursor, Codex, and 40+ agents — and activate on their own when your prompt matches the work.
 
+## Or let iArt run it
+
+![Made in iArt with DeepSeek: four films from one-line prompts](./iart-showcase.gif)
+
+*Made in iArt with DeepSeek, each from a one-line prompt.*
+
+These skills are the craft inside **[iArt](https://www.iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=run-it)**, the strongest DeepSeek animation agent. Prebuilt scaffolding, context design and tool design reach the same quality at about **1/5 of the cost** of running the model yourself (average of 10,000+ ablation runs). Made for the latest models: DeepSeek 4.1, Claude Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5 and Gemini 4 Argon. Voiceover, image generation and AI video come out of the same credit. [See pricing →](https://www.iart.ai/pricing?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=run-it)
+
 ## What's a skill?
 
 A skill is a self-contained folder (`SKILL.md` + `references/`) that teaches an agent one motion-graphics workflow — kinetic typography, beat-synced cuts, frame-accurate data charts, accessible web animation, and so on. No model fine-tuning, no plugin runtime: just the know-how, in a format every major agent already reads.
@@ -68,4 +78,4 @@ MIT — use them freely.
 
 ---
 
-Built by **[iart.ai](https://iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=footer)**, the AI motion agent — describe it in a prompt, or point it at a CSV or brand kit, and get editable, on-brand motion graphics with exact text and numbers.
+Built by **[iart.ai](https://www.iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=footer)**, the AI motion agent — describe it in a prompt, or point it at a CSV or brand kit, and get editable, on-brand motion graphics with exact text and numbers.
