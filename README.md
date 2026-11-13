@@ -62,6 +62,21 @@ Once installed, skills are auto-discovered by Claude Code, Cursor, Codex, and 40
 
 These skills are the craft inside **[iArt](https://www.iart.ai/?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=run-it)**, the strongest DeepSeek animation agent and the cheapest Claude animation agent. On Claude, prebuilt scaffolding, context design and tool design reach the same quality at about **1/5 of the cost** of running the model yourself (average of 10,000+ ablation runs on Claude). Made for the latest models: DeepSeek 4.1, Claude Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5 and Gemini 4 Argon. Voiceover, image generation and AI video come out of the same credit. [See pricing →](https://www.iart.ai/pricing?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=run-it)
 
+### Or call iArt from your agent (MCP)
+
+iArt also runs as a remote MCP server (beta), so the agent you already code with can hand a whole video to iArt: describe it in chat, get back an MP4 and a share link a few minutes later. Pass your logo or screenshots as files, revise it in plain words. Part of the Pro, Ultra and Max plans; create an API key in the app (account menu → API).
+
+```bash
+# Claude Code
+claude mcp add --transport http iart https://app.iart.ai/api/mcp --header "Authorization: Bearer YOUR_API_KEY"
+
+# Codex
+export IART_API_KEY=YOUR_API_KEY
+codex mcp add iart --url https://app.iart.ai/api/mcp --bearer-token-env-var IART_API_KEY
+```
+
+Cursor, VS Code and the REST API: **[iart.ai/docs/mcp](https://www.iart.ai/docs/mcp?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=mcp)**.
+
 ## What's a skill?
 
 A skill is a self-contained folder (`SKILL.md` + `references/`) that teaches an agent one motion-graphics workflow — kinetic typography, beat-synced cuts, frame-accurate data charts, accessible web animation, and so on. No model fine-tuning, no plugin runtime: just the know-how, in a format every major agent already reads.
