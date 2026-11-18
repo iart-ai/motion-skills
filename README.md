@@ -75,6 +75,8 @@ export IART_API_KEY=YOUR_API_KEY
 codex mcp add iart --url https://app.iart.ai/api/mcp --bearer-token-env-var IART_API_KEY
 ```
 
+In the Claude app (claude.ai or desktop) and ChatGPT there is no key: add `https://app.iart.ai/api/mcp` as a custom connector (Claude) or a custom MCP server with OAuth (ChatGPT), sign in to iArt, then ask for a video in the chat. Step-by-step with screenshots: **[Claude](https://www.iart.ai/help/use-iart-in-claude?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=mcp-claude)** · **[ChatGPT](https://www.iart.ai/help/use-iart-in-chatgpt?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=mcp-chatgpt)**.
+
 Cursor, VS Code and the REST API: **[iart.ai/docs/mcp](https://www.iart.ai/docs/mcp?utm_source=github&utm_medium=readme&utm_campaign=motion-skills&utm_content=mcp)**.
 
 ## What's a skill?
